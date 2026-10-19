@@ -10,14 +10,15 @@ class PostRemoteDataSource {
 
   Future<List<PostModel>> getPosts() async {
     final response = await client.get(
-      Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+      Uri.parse('https://dummyjson.com/posts?limit=50'),
     );
 
     if (response.statusCode != 200) {
       throw Exception('Server error: ${response.statusCode}');
     }
 
-    final data = jsonDecode(response.body) as List<dynamic>;
+    final body = jsonDecode(response.body) as Map<String, dynamic>;
+    final data = body['posts'] as List<dynamic>;
     return data
         .map((e) => PostModel.fromJson(e as Map<String, dynamic>))
         .toList();

@@ -4,7 +4,7 @@ import 'package:posts_app/features/posts/data/datasources/post_remote_data_sourc
 import 'package:posts_app/features/posts/data/repositories/post_repository_impl.dart';
 import 'package:posts_app/features/posts/domain/repositories/post_repository.dart';
 import 'package:posts_app/features/posts/domain/usecases/get_posts.dart';
-import 'package:posts_app/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:posts_app/features/posts/presentation/bloc/posts_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -20,5 +20,5 @@ void setupDI() {
     ..registerLazySingleton<GetPosts>(
       () => GetPosts(getIt<PostRepository>()),
     )
-    ..registerFactory<PostsCubit>(() => PostsCubit(getIt<GetPosts>()));
+    ..registerFactory<PostsBloc>(() => PostsBloc(getIt<GetPosts>()));
 }
